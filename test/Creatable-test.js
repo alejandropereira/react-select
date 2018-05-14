@@ -150,7 +150,6 @@ describe('Creatable', () => {
 			options,
 		});
 		typeSearchText('on'); // ['Create option "on"', 'One']
-		TestUtils.Simulate.keyDown(filterInputNode, { keyCode: 40, key: 'ArrowDown' }); // Select 'One'
 		TestUtils.Simulate.keyDown(filterInputNode, { keyCode: 13 });
 		expect(options, 'to have length', 1);
 	});
