@@ -2311,7 +2311,8 @@ var CreatableSelect = function (_React$Component) {
 			var _props2 = this.props,
 			    filterOptions$$1 = _props2.filterOptions,
 			    isValidNewOption = _props2.isValidNewOption,
-			    promptTextCreator = _props2.promptTextCreator;
+			    promptTextCreator = _props2.promptTextCreator,
+			    preferCreatableMatch = _props2.preferCreatableMatch;
 
 			// TRICKY Check currently selected options as well.
 			// Don't display a create-prompt for a value that's selected.
@@ -2347,7 +2348,11 @@ var CreatableSelect = function (_React$Component) {
 						valueKey: this.valueKey
 					});
 
-					filteredOptions.unshift(this._createPlaceholderOption);
+					if (preferCreatableMatch) {
+						filteredOptions.unshift(this._createPlaceholderOption);
+					} else {
+						filteredOptions.push(this._createPlaceholderOption);
+					}
 				}
 			}
 
@@ -2541,7 +2546,8 @@ CreatableSelect.defaultProps = {
 	menuRenderer: menuRenderer,
 	newOptionCreator: newOptionCreator,
 	promptTextCreator: promptTextCreator,
-	shouldKeyDownEventCreateNewOption: shouldKeyDownEventCreateNewOption
+	shouldKeyDownEventCreateNewOption: shouldKeyDownEventCreateNewOption,
+	preferCreatableMatch: false
 };
 
 CreatableSelect.propTypes = {
@@ -2584,6 +2590,9 @@ CreatableSelect.propTypes = {
 	// Creates prompt/placeholder option text.
 	// (filterText: string): string
 	promptTextCreator: PropTypes.func,
+
+	// Shows prompt/placeholder option at top (default to false).
+	preferCreatableMatch: PropTypes.bool,
 
 	ref: PropTypes.func,
 
